@@ -20,13 +20,12 @@ class SpotifyClient:
     # Sends an authenticated request to the spotify API.
     # The request is attempted using an access token, and if it is expired,
     # it uses a refresh token, to get a new access token.
-    def send_authenticated_request(self, method, url, headers=None, data=None):
-        access_token = self.token_manager.access_token['token']
+    def send_authenticated_request(self, method, url, data=None):
         response = self.requests_client.send_request(
             method=method,
             url=url,
             headers={
-                'Authorization': f'Bearer {access_token}'
+                'Authorization': f'Bearer {self.token_manager.access_token}'
             },
             data=data
         )
@@ -36,13 +35,11 @@ class SpotifyClient:
             self.token_manager.get_new_access_token_with_refresh_token()
 
             # Retry the request with the new access token
-            access_token = self.token_manager.access_token['token']
             response = self.requests_client.send_request(
                 method=method,
                 url=url,
                 headers={
-                    **headers,
-                    'Authorization': f'Bearer {access_token}'
+                    'Authorization': f'Bearer {self.token_manager.access_token}'
                 },
                 data=data
             )

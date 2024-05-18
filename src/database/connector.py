@@ -91,7 +91,7 @@ def fetch_latest_tokens():
                 refresh_token_bytes = latest_refresh_token['token']
                 latest_refresh_token['token'] = fernet.decrypt(refresh_token_bytes).decode()
 
-            return latest_access_token, latest_refresh_token
+            return latest_access_token['token'], latest_refresh_token['token']
     except PyMongoError as e:
         print(f"An error occurred while fetching tokens: {e}")
         return None, None

@@ -55,7 +55,7 @@ class SpotifyTokenManager:
             },
             data={
                 'grant_type': 'refresh_token',
-                'refresh_token': self.refresh_token['token'],
+                'refresh_token': self.refresh_token,
             }
         )
 
