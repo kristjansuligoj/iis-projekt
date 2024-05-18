@@ -1,8 +1,6 @@
 name: Handle Spotify and weather data
 
 on:
-  schedule:
-    - cron: '0 * * * *'
   workflow_dispatch:
 
 env:
