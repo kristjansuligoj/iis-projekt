@@ -40,9 +40,14 @@ def create_df_artist_information():
 
     rows = []
     for artist in data['artists']:
+        if len(artist['genres']) > 0:
+            genre = artist['genres'][0]
+        else:
+            genre = ""
+
         row = {
             'artist': artist['name'],
-            'genre': artist['genres'][0],
+            'genre': genre,
         }
 
         rows.append(row)
