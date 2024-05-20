@@ -18,6 +18,7 @@ pandas = "^2.2.2"
 retry-requests = "^2.0.0"
 openmeteo-requests = "^1.2.0"
 requests-cache = "^1.2.0"
+great-expectations = "^0.18.13"
 
 
 [build-system]
