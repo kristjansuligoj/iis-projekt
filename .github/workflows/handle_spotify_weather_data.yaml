@@ -111,6 +111,7 @@ jobs:
 
 
   validate_data:
+    needs: handle_data
     runs-on: ubuntu-latest
 
     permissions:
