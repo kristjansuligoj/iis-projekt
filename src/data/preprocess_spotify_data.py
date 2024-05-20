@@ -18,12 +18,31 @@ def create_df_recently_played():
         track = item['track']
 
         row = {
-            'artists': track['artists'][0]['name'],
+            'artist': track['artists'][0]['name'],
             'duration': track['duration_ms'],
             'explicit': track['explicit'],
             'name': track['name'],
             'popularity': track['popularity'],
             'played_at': item['played_at'],
+        }
+
+        rows.append(row)
+
+    return pd.DataFrame(rows)
+
+
+def create_df_artist_information():
+    raw_spotify_data_file = os.path.join(RAW_DATA_DIR, "spotify", "raw_spotify_artist_information.json")
+
+    # Read data from the JSON file
+    with open(raw_spotify_data_file, "r") as json_file:
+        data = json.load(json_file)
+
+    rows = []
+    for artist in data['artists']:
+        row = {
+            'artist': artist['name'],
+            'genre': artist['genres'][0],
         }
 
         rows.append(row)
@@ -39,20 +58,20 @@ def create_df_track_features():
         data = json.load(json_file)
 
     rows = []
-    for item in data['audio_features']:
+    for audio_feature in data['audio_features']:
         row = {
-            'danceability': item['danceability'],
-            'energy': item['energy'],
-            'key': item['key'],
-            'loudness': item['loudness'],
-            'mode': item['mode'],
-            'speechiness': item['speechiness'],
-            'acousticness': item['acousticness'],
-            'instrumentalness': item['instrumentalness'],
-            'liveness': item['liveness'],
-            'valence': item['valence'],
-            'tempo': item['tempo'],
-            'id': item['id'],
+            'danceability': audio_feature['danceability'],
+            'energy': audio_feature['energy'],
+            'key': audio_feature['key'],
+            'loudness': audio_feature['loudness'],
+            'mode': audio_feature['mode'],
+            'speechiness': audio_feature['speechiness'],
+            'acousticness': audio_feature['acousticness'],
+            'instrumentalness': audio_feature['instrumentalness'],
+            'liveness': audio_feature['liveness'],
+            'valence': audio_feature['valence'],
+            'tempo': audio_feature['tempo'],
+            'id': audio_feature['id'],
         }
 
         rows.append(row)
@@ -63,8 +82,10 @@ def create_df_track_features():
 def main():
     df_recently_played = create_df_recently_played()
     df_track_features = create_df_track_features()
+    df_artist_information = create_df_artist_information()
 
     df = pd.concat([df_recently_played, df_track_features], axis=1)
+    df = pd.merge(df, df_artist_information, on='artist', how='inner')
     df = df.drop(columns='id')
 
     column_rename_mapping = {
