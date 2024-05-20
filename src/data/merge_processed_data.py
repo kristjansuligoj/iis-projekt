@@ -29,7 +29,7 @@ def main():
 
         # Desired column order
         desired_order = [
-            'listened_at', 'artist', 'name', 'genre', 'length', 'explicit', 'popularity', 'danceability', 'energy', 'key',
+            'date', 'artist', 'name', 'genre', 'length', 'explicit', 'popularity', 'danceability', 'energy', 'key',
             'loudness', 'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence',
             'tempo', 'temperature', 'relative_humidity', 'dew_point', 'apparent_temperature',
             'precipitation_probability', 'rain', 'surface_pressure'
