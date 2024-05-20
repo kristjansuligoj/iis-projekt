@@ -59,3 +59,10 @@ class SpotifyClient:
             method="GET",
             url=f"{self.spotify_api_url}/audio-features/?ids={track_ids}",
         )
+
+    # Get artist information
+    def get_several_artists(self, artist_ids):
+        return self.send_authenticated_request(
+            method="GET",
+            url=f"{self.spotify_api_url}/artists/?ids={artist_ids}",
+        )
