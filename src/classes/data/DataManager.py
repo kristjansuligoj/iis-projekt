@@ -30,7 +30,7 @@ class DataManager:
             print(f"Data saved to {file_path}")
 
     @staticmethod
-    def make_directory_if_missing(self, directory_path):
+    def make_directory_if_missing(directory_path):
         if not os.path.exists(directory_path):
             os.makedirs(directory_path)
 
