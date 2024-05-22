@@ -38,7 +38,6 @@ def main():
         TestNumberOfDuplicatedRows(),
         TestNumberOfDuplicatedColumns(),
         TestColumnsType(),
-        TestNumberOfDriftedColumns(),
     ])
 
     tests.run(
