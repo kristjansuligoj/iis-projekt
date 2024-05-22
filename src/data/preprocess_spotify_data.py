@@ -19,10 +19,7 @@ def create_df_recently_played():
 
         row = {
             'artist': track['artists'][0]['name'],
-            'duration': track['duration_ms'],
             'explicit': track['explicit'],
-            'name': track['name'],
-            'popularity': track['popularity'],
             'played_at': item['played_at'],
         }
 
@@ -91,10 +88,9 @@ def main():
 
     df = pd.concat([df_recently_played, df_track_features], axis=1)
     df = pd.merge(df, df_artist_information, on='artist', how='inner')
-    df = df.drop(columns='id')
+    df = df.drop(columns=['id', 'artist'])
 
     column_rename_mapping = {
-        'duration': 'length',
         'played_at': 'date',
     }
 
