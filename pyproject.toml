@@ -12,7 +12,7 @@ requests = "^2.31.0"
 python-dotenv = "^1.0.1"
 flask = "^3.0.2"
 flask-cors = "^4.0.1"
-pymongo = "^3.12"
+pymongo= { version = "^3.12", extras=["srv"] }
 cryptography = "^42.0.7"
 pandas = "^2.2.2"
 retry-requests = "^2.0.0"
@@ -31,6 +31,7 @@ skl2onnx = "^1.16.0"
 tensorflow = "^2.16.1"
 tf2onnx = "^1.16.1"
 keras = "^3.3.3"
+onnxruntime = "^1.18.0"
 
 [tool.poetry.dependencies."urllib3"]
 version = ">=1.25.4,<2.2.0"
