@@ -6,6 +6,37 @@ import json
 import os
 
 
+def simplify_genre(genres):
+    # Genre mappings
+    genre_mappings = {
+        'classical': 'classical',
+        'hip hop': 'hip hop',
+        'pop': 'pop',
+        'rap': 'rap',
+        'metal': 'metal',
+        'country': 'country',
+        'lo-fi': 'lo-fi',
+        'indie': 'indie',
+        'rock': 'rock',
+    }
+
+    # Iterate through the provided genres
+    general_genre = ""
+    for genre in genres:
+        # Check if the genre matches any of the mappings exactly
+        if genre.lower() in genre_mappings:
+            general_genre = genre_mappings[genre.lower()]
+
+        else:
+            # Check if any mapping is a substring of the genre
+            for mapping in genre_mappings:
+                if mapping in genre.lower():
+                    general_genre = genre_mappings[mapping]
+                    break  # Stop searching for mappings if a match is found
+
+    return general_genre
+
+
 def create_df_recently_played():
     raw_spotify_data_file = os.path.join(RAW_DATA_DIR, "spotify", "raw_spotify_recently_played_tracks.json")
 
@@ -38,9 +69,12 @@ def create_df_artist_information():
     rows = []
     for artist in data['artists']:
         if len(artist['genres']) > 0:
-            genre = artist['genres'][0]
+            genre = simplify_genre(artist['genres'])
         else:
             genre = ""
+
+        if genre == "":
+            continue
 
         row = {
             'artist': artist['name'],
