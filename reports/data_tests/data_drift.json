@@ -1,7 +1,7 @@
 {
-  "id": "352c8ff7-29ec-408f-afb5-28e57d9b832d",
+  "id": "449c346e-3a12-4748-8844-bae350066a80",
   "name": null,
-  "timestamp": "2024-05-24T22:25:34.126427",
+  "timestamp": "2024-05-24T23:25:39.746623",
   "metadata": {
     "metric_presets": [
       "DataDriftPreset"
@@ -13700,56 +13700,28 @@
     },
     "data_definition": {
       "columns": {
-        "loudness": {
-          "column_name": "loudness",
-          "column_type": "num"
-        },
-        "tempo": {
-          "column_name": "tempo",
-          "column_type": "num"
-        },
-        "liveness": {
-          "column_name": "liveness",
-          "column_type": "num"
-        },
-        "apparent_temperature": {
-          "column_name": "apparent_temperature",
-          "column_type": "num"
-        },
         "key": {
           "column_name": "key",
-          "column_type": "num"
-        },
-        "energy": {
-          "column_name": "energy",
-          "column_type": "num"
-        },
-        "dew_point": {
-          "column_name": "dew_point",
           "column_type": "num"
         },
         "danceability": {
           "column_name": "danceability",
           "column_type": "num"
         },
-        "surface_pressure": {
-          "column_name": "surface_pressure",
+        "apparent_temperature": {
+          "column_name": "apparent_temperature",
           "column_type": "num"
         },
-        "precipitation_probability": {
-          "column_name": "precipitation_probability",
+        "surface_pressure": {
+          "column_name": "surface_pressure",
           "column_type": "num"
         },
         "instrumentalness": {
           "column_name": "instrumentalness",
           "column_type": "num"
         },
-        "speechiness": {
-          "column_name": "speechiness",
-          "column_type": "num"
-        },
-        "relative_humidity": {
-          "column_name": "relative_humidity",
+        "loudness": {
+          "column_name": "loudness",
           "column_type": "num"
         },
         "acousticness": {
@@ -13768,13 +13740,33 @@
           "column_name": "valence",
           "column_type": "num"
         },
-        "mode": {
-          "column_name": "mode",
-          "column_type": "cat"
+        "dew_point": {
+          "column_name": "dew_point",
+          "column_type": "num"
         },
-        "explicit": {
-          "column_name": "explicit",
-          "column_type": "cat"
+        "tempo": {
+          "column_name": "tempo",
+          "column_type": "num"
+        },
+        "speechiness": {
+          "column_name": "speechiness",
+          "column_type": "num"
+        },
+        "energy": {
+          "column_name": "energy",
+          "column_type": "num"
+        },
+        "liveness": {
+          "column_name": "liveness",
+          "column_type": "num"
+        },
+        "relative_humidity": {
+          "column_name": "relative_humidity",
+          "column_type": "num"
+        },
+        "precipitation_probability": {
+          "column_name": "precipitation_probability",
+          "column_type": "num"
         },
         "date": {
           "column_name": "date",
@@ -13782,6 +13774,14 @@
         },
         "genre": {
           "column_name": "genre",
+          "column_type": "cat"
+        },
+        "explicit": {
+          "column_name": "explicit",
+          "column_type": "cat"
+        },
+        "mode": {
+          "column_name": "mode",
           "column_type": "cat"
         }
       },
