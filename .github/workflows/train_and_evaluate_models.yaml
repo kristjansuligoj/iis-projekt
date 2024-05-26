@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_SECRET_ACCESS_KEY }}
+  DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
   DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
   DAGSHUB_URI: ${{ secrets.DAGSHUB_URI }}
   DAGSHUB_REPO_NAME: ${{ secrets.DAGSHUB_REPO_NAME }}
