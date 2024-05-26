@@ -29,8 +29,12 @@ dagshub = "^0.3.27"
 pymongo= { version = "^3.12", extras=["srv"] }
 tf2onnx = "1.16.1"
 onnxruntime = "^1.17.3"
-tensorflow = "2.13.0"
+tensorflow = "^2.13.0"
 tensorflow-io-gcs-filesystem = "0.37.0"
+transformers = "^4.41.1"
+scipy = "^1.13.1"
+torch = "^2.3.0"
+tf-keras = "^2.16.0"
 
 [tool.poetry.dependencies."urllib3"]
 version = ">=1.25.4,<2.2.0"

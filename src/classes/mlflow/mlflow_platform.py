@@ -53,6 +53,25 @@ class MlflowPlatform:
             stage=stage,
         )
 
+    def save_musicgen_model(self, model_wrapper, model_name, stage):
+        mlflow_model = mlflow.pyfunc.log_model(
+            python_model=model_wrapper,
+            artifact_path=f"models/{model_name}",
+            registered_model_name=model_name
+        )
+
+        model_version = self.client.create_model_version(
+            name=model_name,
+            source=mlflow_model.model_uri,
+            run_id=mlflow.active_run().info.run_id
+        )
+
+        self.client.transition_model_version_stage(
+            name=model_name,
+            version=model_version.version,
+            stage=stage,
+        )
+
     def download_onnx_model(self, model_name, stage):
         try:
             # Get model latest staging source
@@ -75,21 +94,37 @@ class MlflowPlatform:
             print(f"There was an error downloading {pipeline_name} in {stage}")
             return None
 
-    def get_latest_model(self, stage):
+    def get_latest_model(self, stage, name):
         # Download model and pipeline for station
-        model = self.download_onnx_model("classification_model", stage)
-        pipeline = self.download_pipeline("classification_model_pipeline", stage)
+        model = self.download_onnx_model(name, stage)
+        pipeline = self.download_pipeline(f"{name}_pipeline", stage)
 
         # Create model directory if it does not exist
-        base_station_directory = os.path.join(ROOT_DIR, "models", "classification_model")
+        base_station_directory = os.path.join(ROOT_DIR, "models", name)
         DataManager.make_directory_if_missing(base_station_directory)
 
         # Save pipeline
-        pipeline_path = os.path.join(base_station_directory, f"pipeline=classification_model.gz")
+        pipeline_path = os.path.join(base_station_directory, f"pipeline={name}.gz")
         joblib.dump(pipeline, pipeline_path)
 
         # Save model
-        model_path = os.path.join(base_station_directory, f"model=classification_model.onnx")
+        model_path = os.path.join(base_station_directory, f"model={name}.onnx")
         onnx.save_model(model, model_path)
 
         return model_path, pipeline
+
+    def replace_prod_model(self, name):
+        model_name = f"model={name}"
+        pipeline_name = f"pipeline={name}"
+
+        try:
+            # Get model and scaler latest staging version
+            model_version = self.client.get_latest_versions(name=model_name, stages=["staging"])[0].version
+            pipeline_version = self.client.get_latest_versions(name=pipeline_name, stages=["staging"])[0].version
+
+            # Update production model and scaler
+            self.client.transition_model_version_stage(model_name, model_version, "production")
+            self.client.transition_model_version_stage(pipeline_name, pipeline_version, "production")
+        except IndexError:
+            print(f"There was an error replacing production model {model_name}")
+            return None

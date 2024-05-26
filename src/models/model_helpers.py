@@ -1,12 +1,12 @@
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder, LabelEncoder
-from tensorflow.keras.layers import Dense, Input, Dropout, GRU
-from tensorflow.keras.models import Sequential
+import tensorflow as tf
+from tensorflow import keras
 from sklearn.compose import ColumnTransformer
 from definitions import PROCESSED_DATA_DIR
 from sklearn.pipeline import Pipeline
 
+
 import tensorflow_model_optimization as tmo
-import tensorflow as tf
 import pandas as pd
 import tf2onnx
 import os
@@ -30,19 +30,19 @@ def convert_model_to_onnx(model):
     return onnx_model
 
 
-def create_and_compile_model(input_shape):
-    model = Sequential([
-        Input(shape=input_shape),
-        tmo.quantization.keras.quantize_annotate_layer(Dense(64, activation='relu')),
-        Dropout(0.1),
-        tmo.quantization.keras.quantize_annotate_layer(Dense(32, activation='relu')),
-        Dropout(0.1),
-        tmo.quantization.keras.quantize_annotate_layer(Dense(1, activation='softmax')),
+def create_and_compile_model(input_shape, num_classes):
+    model = keras.models.Sequential([
+        keras.layers.Input(shape=input_shape),
+        tmo.quantization.keras.quantize_annotate_layer(keras.layers.Dense(32, activation='relu')),
+        keras.layers.Dropout(0.1),
+        tmo.quantization.keras.quantize_annotate_layer(keras.layers.Dense(16, activation='relu')),
+        keras.layers.Dropout(0.1),
+        tmo.quantization.keras.quantize_annotate_layer(keras.layers.Dense(num_classes, activation='softmax')),
     ])
 
     tmo.quantization.keras.quantize_apply(model)
 
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
     return model
 
