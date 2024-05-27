@@ -115,22 +115,3 @@ def fetch_data(collection_name, query, projection=None):
     except PyMongoError as e:
         print(f"An error occurred while fetching data: {e}")
         return None
-
-
-def get_predictions_today_by_station(station_name):
-    try:
-        client = get_database_client()
-        if client:
-            db = client.get_database('iis')
-            collection = db.get_collection('predictions')
-            # Define start and end of today
-            start_of_day = datetime.combine(date.today(), datetime.min.time())
-            end_of_day = datetime.combine(date.today(), datetime.max.time())
-            # Query for predictions from today for the specified station
-            predictions_today = collection.find({
-                'station': station_name,
-                'date': {'$gte': start_of_day, '$lte': end_of_day}
-            })
-            return list(predictions_today)
-    except Exception as e:
-        print(f"An error occurred: {e}")

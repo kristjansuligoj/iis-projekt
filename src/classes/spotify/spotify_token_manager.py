@@ -10,6 +10,7 @@ class SpotifyTokenManager:
         self.spotify_api_token_url = os.getenv("SPOTIFY_API_TOKEN_URL")
         self.client_id = os.getenv("SPOTIFY_CLIENT_ID")
         self.client_secret = os.getenv("SPOTIFY_CLIENT_SECRET")
+        self.redirect_uri = os.getenv("SPOTIFY_REDIRECT_URI")
         self.access_token, self.refresh_token = fetch_latest_tokens()
 
         client_credentials = f'{self.client_id}:{self.client_secret}'
@@ -29,7 +30,7 @@ class SpotifyTokenManager:
             data={
                 'grant_type': 'authorization_code',
                 'code': code,
-                'redirect_uri': "http://localhost:8080"
+                'redirect_uri': self.redirect_uri
             }
         )
 
