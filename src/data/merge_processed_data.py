@@ -17,6 +17,10 @@ def check_if_weather_data_exists(df):
     # Get the indices of rows with missing values in any of the specified columns
     missing_indices = df[weather_columns].isna().any(axis=1).to_numpy().nonzero()[0]
 
+    print(missing_indices)
+
+    print(df.to_string(index=False))
+
     # Check if any of the specified columns contain NaN values
     if len(missing_indices) > 0:
         # We need all weather data, so we can fill the missing values
@@ -52,8 +56,8 @@ def main():
         df = pd.read_csv(df_processed_data)
 
         # Clear the files for further use
-        DataManager.clear_csv(df_spotify_file)
-        DataManager.clear_csv(df_weather_file)
+        # DataManager.clear_csv(df_spotify_file)
+        # DataManager.clear_csv(df_weather_file)
 
         df_spotify['date'] = pd.to_datetime(df_spotify['date'])
         df_weather['date'] = pd.to_datetime(df_weather['date'])
@@ -75,10 +79,10 @@ def main():
 
         # Add the newly fetched data
         df = pd.concat([df, df_merged])
-        df.reset_index(drop=True, inplace=True)
 
         # Drop if any track is repeated. This can happen if user has not listened to any new songs since last fetch
         df = df.drop_duplicates(subset=['date'])
+        df.reset_index(drop=True, inplace=True)
 
         # Sort by date to keep them in order
         df = df.sort_values(by='date')
