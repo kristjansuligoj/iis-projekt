@@ -1,11 +1,12 @@
 from src.classes.data.DataManager import DataManager
 from definitions import ROOT_DIR
-import os
+from mlflow import MlflowClient
+
+import dagshub
+import mlflow
 import joblib
 import onnx
-from mlflow import MlflowClient
-import mlflow
-import dagshub
+import os
 
 
 class MlflowPlatform:

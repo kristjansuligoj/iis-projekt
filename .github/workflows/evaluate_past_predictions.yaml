@@ -11,6 +11,11 @@ env:
   DAGSHUB_URI: ${{ secrets.DAGSHUB_URI }}
   DAGSHUB_REPO_NAME: ${{ secrets.DAGSHUB_REPO_NAME }}
 
+  ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+
+  MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+  MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+
 jobs:
   evaluate_predictions_from_today:
     runs-on: ubuntu-latest
