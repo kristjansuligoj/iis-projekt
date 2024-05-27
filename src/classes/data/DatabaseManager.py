@@ -2,8 +2,8 @@ from pymongo.errors import DuplicateKeyError, PyMongoError
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from cryptography.fernet import Fernet
+from datetime import datetime, date
 from dotenv import load_dotenv
-from datetime import datetime
 import os
 
 load_dotenv()
@@ -106,3 +106,22 @@ class DatabaseManager:
         except PyMongoError as e:
             print(f"An error occurred while fetching data: {e}")
             return None
+
+    def fetch_predictions_from_today(self):
+        try:
+            if self.client:
+                db = self.client.get_database('iis')
+                collection = db.get_collection('predictions')
+
+                # Define start and end of today
+                start_of_day = datetime.combine(date.today(), datetime.min.time())
+                end_of_day = datetime.combine(date.today(), datetime.max.time())
+
+                # Query for predictions from today for the specified station
+                predictions_today = collection.find({
+                    'datetime': {'$gte': start_of_day, '$lte': end_of_day}
+                })
+
+                return list(predictions_today)
+        except Exception as e:
+            print(f"An error occurred: {e}")

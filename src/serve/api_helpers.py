@@ -1,6 +1,7 @@
 from src.classes.mlflow.mlflow_platform import MlflowPlatform
-from mlflow.exceptions import RestException
+from src.classes.data.DatabaseManager import DatabaseManager
 from definitions import ROOT_DIR, RAW_DATA_DIR
+from mlflow.exceptions import RestException
 from transformers import pipeline
 from datetime import datetime
 
@@ -13,6 +14,7 @@ import time
 import os
 
 ml_flow_platform = MlflowPlatform()
+database_manager = DatabaseManager()
 
 
 def get_prompt(df_input, genre):
@@ -194,3 +196,15 @@ def create_model_input(classification_pipeline, track_data):
     df_input = pd.concat([df_track, df_weather], axis=1)
 
     return classification_pipeline.transform(df_input), df_input
+
+
+def add_prediction_to_database(df_input, genre):
+    track_data_dict = df_input.to_dict(orient='records')
+
+    prediction = {
+        'prediction': genre,
+        'datetime': datetime.now(),
+        'track_data': track_data_dict,
+    }
+
+    database_manager.insert_data("predictions", prediction)

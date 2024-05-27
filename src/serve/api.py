@@ -111,6 +111,10 @@ def api():
         # Predict the genre
         genre = api_helpers.predict_genre(classification_model, X_predict)
 
+        # Insert prediction to database
+        api_helpers.add_prediction_to_database(df_input, genre)
+
+        # Start creating a track on a separate track
         threading.Thread(target=generate_track_async, args=(df_input, genre)).start()
 
         return jsonify('Your track is being generated. This could take some time.', 200)
