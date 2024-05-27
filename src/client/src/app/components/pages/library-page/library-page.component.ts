@@ -32,6 +32,9 @@ export class LibraryPageComponent implements OnInit {
 
   public getTracks(): void {
     this.trackService.getGeneratedTracks().subscribe(async (tracks: any) => {
+      let trackCount = 0;
+      const totalTracks = tracks[0].length;
+
       for(const track of tracks[0]) {
         const blobData: Blob = await firstValueFrom(this.trackService.downloadTrack(track));
         const blobUrl: string = window.URL.createObjectURL(blobData);
@@ -42,6 +45,18 @@ export class LibraryPageComponent implements OnInit {
         }
 
         this.tracks.push(trackData);
+        trackCount++;
+
+        // Check if all tracks are fetched
+        if (trackCount === totalTracks) {
+          // Sort tracks based on Unix timestamp in descending order
+          this.tracks.sort((first: any, second: any) => {
+            const firstTimestamp = first.title.match(/\d+/)[0];
+            const secondTimestamp = second.title.match(/\d+/)[0];
+
+            return secondTimestamp - firstTimestamp;
+          });
+        }
       }
     });
   }
