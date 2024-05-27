@@ -1,0 +1,160 @@
+<!--               -->
+<!-- DEFAULT FORM -->
+<!--               -->
+<div class="form-container" *ngIf="mode=='default'">
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label>Danceability</label>
+
+      <hr/>
+
+      <div class="radio-container">
+        <div class="radio-item">
+          <input type="radio" id="notDanceable" name="danceability" [value]="0" formControlName="danceability">
+          <label for="notDanceable">Not danceable at all</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="danceable" name="danceability" [value]="0.5" formControlName="danceability">
+          <label for="danceable">Danceable</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="veryDanceable" name="danceability" [value]="1" formControlName="danceability">
+          <label for="veryDanceable">Very danceable</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Energy</label>
+
+      <hr/>
+
+      <div class="radio-container">
+        <div class="radio-item">
+          <input type="radio" id="lowEnergy" name="energy" [value]="0" formControlName="energy">
+          <label for="lowEnergy">Low energy</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="mediumEnergy" name="energy" [value]="0.5" formControlName="energy">
+          <label for="mediumEnergy">Medium energy</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="highEnergy" name="energy" [value]="1" formControlName="energy">
+          <label for="highEnergy">High energy</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Tempo</label>
+
+      <hr/>
+
+      <div class="radio-container">
+        <div class="radio-item">
+          <input type="radio" id="slowTempo" name="tempo" [value]="0" formControlName="tempo">
+          <label for="slowTempo">Slow tempo</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="mediumTempo" name="tempo" [value]="150" formControlName="tempo">
+          <label for="mediumTempo">Medium tempo</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="fastTempo" name="tempo" [value]="300" formControlName="tempo">
+          <label for="fastTempo">Fast tempo</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button type="submit" class="button">Generate music</button>
+    </div>
+  </form>
+</div>
+
+
+
+<!--               -->
+<!-- ADVANCED FORM -->
+<!--               -->
+<div class="form-container" *ngIf="mode=='advanced'">
+  <form [formGroup]="advancedForm" (ngSubmit)="submitForm()">
+    <div>
+      <app-slider-input
+        [label]="'Acousticness'"
+        [controlName]="'acousticness'"
+        [formGroup]="advancedForm"
+        [minValue]="0"
+        [maxValue]="1"
+        [step]="0.01"
+        [description]="'How acoustic the track is.'"
+      ></app-slider-input>
+    </div>
+
+    <div>
+      <app-slider-input
+        [label]="'Danceability'"
+        [controlName]="'danceability'"
+        [formGroup]="advancedForm"
+        [minValue]="0"
+        [maxValue]="1"
+        [step]="0.01"
+        [description]="'How danceable a track is.'"
+      ></app-slider-input>
+    </div>
+
+    <app-slider-input
+      [label]="'Energy'"
+      [controlName]="'energy'"
+      [formGroup]="advancedForm"
+      [minValue]="0"
+      [maxValue]="1"
+      [step]="0.01"
+      [description]="'Energy level of the track.'"
+    ></app-slider-input>
+
+    <app-slider-input
+      [label]="'Key'"
+      [controlName]="'key'"
+      [formGroup]="advancedForm"
+      [minValue]="-1"
+      [maxValue]="11"
+      [step]="1"
+      [description]="'The key the track is in.'"
+    ></app-slider-input>
+
+    <app-slider-input
+      [label]="'Mode'"
+      [controlName]="'mode'"
+      [formGroup]="advancedForm"
+      [minValue]="0"
+      [maxValue]="1"
+      [step]="1"
+      [description]="'Modality (major or minor) of a track.'"
+    ></app-slider-input>
+
+    <app-slider-input
+      [label]="'Tempo'"
+      [controlName]="'tempo'"
+      [formGroup]="advancedForm"
+      [minValue]="0"
+      [maxValue]="300"
+      [step]="1"
+      [description]="'Beats per minute (BPM) of a track.'"
+    ></app-slider-input>
+
+    <app-slider-input
+      [label]="'Valence'"
+      [controlName]="'valence'"
+      [formGroup]="advancedForm"
+      [minValue]="0"
+      [maxValue]="1"
+      [step]="0.01"
+      [description]="'Musical positiveness conveyed of the track.'"
+    ></app-slider-input>
+
+    <div class="button-container">
+      <button type="submit" class="button">Generate music</button>
+    </div>
+  </form>
+</div>

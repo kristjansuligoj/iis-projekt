@@ -1,0 +1,61 @@
+<div class="navigation">
+  <header>
+    <div class="logo">
+      <ng-icon name="heroCloudSolid" size="35"></ng-icon>
+      <span class="site-name">Rhythmic rain</span>
+    </div>
+  </header>
+
+  <hr>
+
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <ng-icon name="heroHomeSolid"></ng-icon>
+          <span>Homepage</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/profile" routerLinkActive="active">
+          <ng-icon name="heroUserSolid"></ng-icon>
+          <span>My profile</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="authService.authorized ? '/generate-music' : null"
+          [ngClass]="{'unauthorized': !authService.authorized}"
+          routerLinkActive="active"
+        >
+          <ng-icon name="heroMusicalNoteSolid"></ng-icon>
+          <span>Generate music</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="authService.authorized ? '/library' : null"
+          [ngClass]="{'unauthorized': !authService.authorized}"
+          routerLinkActive="active"
+        >
+          <ng-icon name="heroArrowDownTraySolid"></ng-icon>
+          <span>Library</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="authService.authorized ? '/admin-panel' : null"
+          [ngClass]="{'unauthorized': !authService.authorized}"
+          routerLinkActive="active"
+        >
+          <ng-icon name="heroChartBarSolid"></ng-icon>
+          <span>Admin panel</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

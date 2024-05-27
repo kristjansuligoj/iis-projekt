@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.app-navigation {
+  flex: 0 0 auto;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+}

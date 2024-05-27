@@ -1,0 +1,15 @@
+.page {
+  padding: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  padding: 15px;
+}
+
+li {
+  list-style: none;
+}

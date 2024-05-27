@@ -1,0 +1,26 @@
+<div [formGroup]="formGroup" class="form-group">
+  <div class="label-description">
+    <label [for]="controlName">{{ label }}</label>&nbsp; - &nbsp;<span><i>{{ description }}</i></span>
+  </div>
+
+  <hr/>
+
+  <div class="current-value">
+    <span><b>{{ formGroup.get(controlName)?.value }}</b></span>
+  </div>
+
+  <div class="slider-container">
+    <span class="min-value"><b>{{ minValue }}</b></span>
+
+    <input type="range"
+     [id]="controlName"
+     [formControlName]="controlName"
+     [min]="minValue"
+     [max]="maxValue"
+     [step]="step"
+     class="form-control-range"
+    />
+
+    <span class="max-value"><b>{{ maxValue }}</b></span>
+  </div>
+</div>

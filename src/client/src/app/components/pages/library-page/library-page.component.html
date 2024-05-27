@@ -1,0 +1,20 @@
+<div class="page">
+  <div class="header">
+    <h2>Library</h2>
+    <hr/>
+  </div>
+
+  <div class="tracks-container">
+    <div *ngFor="let track of tracks" class="track">
+      <div class="track-info">
+        <p class="generated-at">Generated at: {{ track.title | unixTimestampToDatetime }}</p>
+        <h3 class="title">{{ track.title }}</h3>
+      </div>
+
+      <audio controls>
+        <source [src]="track.url" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+</div>

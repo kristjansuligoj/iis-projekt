@@ -1,0 +1,12 @@
+.page {
+  padding: 30px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}

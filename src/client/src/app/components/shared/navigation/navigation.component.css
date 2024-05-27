@@ -1,0 +1,62 @@
+.navigation {
+  background-color: #16377e;
+  height: 100vh;
+}
+
+.navigation, a {
+  color: white;
+}
+
+.logo {
+  padding: 15px;
+}
+
+.site-name {
+  font-size: 26px;
+  margin-left: 5px;
+}
+
+nav {
+  width: 100%;
+  padding-top: 30px;
+}
+
+hr {
+  height: 1px;
+  color: #ffffff;
+  background: #ffffff;
+  font-size: 0;
+  border: 0;
+  margin-bottom: 0;
+}
+
+li {
+  width: 200px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+a {
+  width: 100%;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 0 15px 15px 0;
+}
+
+a span {
+  margin-left: 5px;
+}
+
+a:hover, .active {
+  background-color: #4269c2;
+}
+
+.unauthorized {
+  background-color: #6b6b6b;
+}
+
+.unauthorized:hover {
+  cursor: not-allowed;
+}

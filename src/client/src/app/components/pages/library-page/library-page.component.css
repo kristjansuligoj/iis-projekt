@@ -1,0 +1,40 @@
+.page {
+  padding: 30px;
+}
+
+.tracks-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.track {
+  background-color: #f8f9fa;
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 3px 12px -1px rgba(0,0,0,0.67);
+  -moz-box-shadow: 2px 3px 12px -1px rgba(0,0,0,0.67);
+  box-shadow: 2px 3px 12px -1px rgba(0,0,0,0.67);
+}
+
+.track h3 {
+  font-size: 1.25em;
+  margin-bottom: 8px;
+}
+
+.track audio {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  flex-grow: 1;
+  text-align: center;
+}
