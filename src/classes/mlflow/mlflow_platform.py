@@ -114,8 +114,8 @@ class MlflowPlatform:
         return model_path, pipeline
 
     def replace_prod_model(self, name):
-        model_name = f"model={name}"
-        pipeline_name = f"pipeline={name}"
+        model_name = f"classification_model"
+        pipeline_name = f"classification_model_pipeline"
 
         try:
             # Get model and scaler latest staging version
