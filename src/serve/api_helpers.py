@@ -159,7 +159,7 @@ def predict_genre(classification_model, X_predict):
 
 def generate_track(musicgen_model, df_input, genre):
     # Track length in seconds
-    duration = 1
+    duration = 5
 
     # Steps per second the model uses
     steps_per_second = 50

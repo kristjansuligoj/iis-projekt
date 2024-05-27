@@ -1,7 +1,7 @@
 from src.classes.spotify.spotify_token_manager import SpotifyTokenManager
 from src.classes.requests.requests_client import RequestsClient
-import os
 import base64
+import os
 
 
 class SpotifyClient:

@@ -1,7 +1,7 @@
 from src.classes.spotify.spotify_token_manager import SpotifyTokenManager
 from flask import Flask, jsonify, request, make_response, send_file
+from src.classes.data.DatabaseManager import DatabaseManager
 from src.classes.spotify.spotify_client import SpotifyClient
-from src.database.connector import fetch_latest_tokens
 from geventwebsocket.handler import WebSocketHandler
 from flask_socketio import SocketIO
 from definitions import ROOT_DIR
@@ -20,6 +20,7 @@ spotify_api_token_url = os.getenv("SPOTIFY_API_TOKEN_URL")
 
 spotify_token_manager = SpotifyTokenManager()
 spotify_client = SpotifyClient()
+database_manager = DatabaseManager()
 
 
 def api():
@@ -82,7 +83,7 @@ def api():
 
     @app.route('/api/authorize/check', methods=['GET'])
     def check_if_authorized():
-        _, refresh_token = fetch_latest_tokens()
+        _, refresh_token = database_manager.fetch_latest_tokens()
 
         if refresh_token == "":
             return make_response(jsonify("You are not authorized."), 401)
