@@ -18,18 +18,18 @@ class MlflowPlatform:
     def save_pipeline(self, pipeline, pipeline_name, stage):
         pipeline = mlflow.sklearn.log_model(
             sk_model=pipeline,
-            artifact_path=f"models/{pipeline_name}",
-            registered_model_name=pipeline_name,
+            artifact_path=f"models/{pipeline_name}/pipeline",
+            registered_model_name=f"pipeline={pipeline_name}",
         )
 
         pipeline_version = self.client.create_model_version(
-            name=pipeline_name,
+            name=f"pipeline={pipeline_name}",
             source=pipeline.model_uri,
             run_id=pipeline.run_id
         )
 
         self.client.transition_model_version_stage(
-            name=pipeline_name,
+            name=f"pipeline={pipeline_name}",
             version=pipeline_version.version,
             stage=stage,
         )
@@ -37,18 +37,18 @@ class MlflowPlatform:
     def save_model(self, model, model_name, stage):
         model = mlflow.onnx.log_model(
             onnx_model=model,
-            artifact_path=f"models/{model_name}",
-            registered_model_name=model_name,
+            artifact_path=f"models/{model_name}/model",
+            registered_model_name=f"model={model_name}",
         )
 
         model_version = self.client.create_model_version(
-            name=model_name,
+            name=f"model={model_name}",
             source=model.model_uri,
             run_id=model.run_id
         )
 
         self.client.transition_model_version_stage(
-            name=model_name,
+            name=f"model={model_name}",
             version=model_version.version,
             stage=stage,
         )
@@ -56,7 +56,7 @@ class MlflowPlatform:
     def save_musicgen_model(self, model_wrapper, model_name, stage):
         mlflow_model = mlflow.pyfunc.log_model(
             python_model=model_wrapper,
-            artifact_path=f"models/{model_name}",
+            artifact_path=f"models/{model_name}/model",
             registered_model_name=model_name
         )
 
