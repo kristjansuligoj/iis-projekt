@@ -1,12 +1,13 @@
 <div class="production-metrics">
-  <p class="title">Production Metrics</p>
+  <div class="header">
+    <h2>Production metrics</h2>
+  </div>
 
   <ng-container *ngIf="generateGraph; else noData">
-    <div class="chart">
+    <div class="chart-container">
       <app-line-chart
-        class="chart"
         [data]="graphData"
-        [size]="[1500, 350]"
+        [size]="[1500, 340]"
         [showLegend]="true"
         [timeline]="true"
         [showGrid]="true"

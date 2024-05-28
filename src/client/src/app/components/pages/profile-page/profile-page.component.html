@@ -4,10 +4,17 @@
     <div class="header">
       <h2>Recently played tracks</h2>
       <hr/>
+
+      <div class="page-description">
+        <i>
+          View your recently played tracks from Spotify and keep track of your listening history.
+        </i>
+
+        <hr>
+      </div>
     </div>
 
-    <div class="recently-played-tracks">
-      <div>
+    <div class="page-content">
         <div *ngFor="let track of tracks" class="track-info">
           <p class="track-details">
             <span><small>{{ track.played_at | dateFormat }}</small></span> <br/>
@@ -15,14 +22,15 @@
             <span><i><small> by {{ getArtistNames(track.track.artists) }}</small></i></span>
           </p>
         </div>
-      </div>
     </div>
   </div>
 
   <ng-template #authSection>
-    <div class="authentication-prompt">
-      <p>Before you can do anything on this site, you need to authenticate, so your Spotify data can be collected.</p>
-      <button class="login-button" (click)="login()">Log In with Spotify</button>
+    <div class="page-content">
+      <div class="authentication-prompt">
+        <p>Before you can do anything on this site, you need to authenticate, so your Spotify data can be collected.</p>
+        <button class="login-button" (click)="login()">Log In with Spotify</button>
+      </div>
     </div>
   </ng-template>
 </div>

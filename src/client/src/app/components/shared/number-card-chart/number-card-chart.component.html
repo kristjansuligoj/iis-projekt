@@ -1,6 +1,11 @@
-<ngx-charts-number-card
-  [results]="data"
-  [view]="size"
-  [scheme]="colorScheme"
->
-</ngx-charts-number-card>
+<div class="chart-container">
+  <h4>{{ title }}</h4>
+
+  <ngx-charts-number-card
+    [results]="data"
+    [view]="size"
+    [scheme]="colorScheme"
+    [cardColor]="cardColor"
+  >
+  </ngx-charts-number-card>
+</div>

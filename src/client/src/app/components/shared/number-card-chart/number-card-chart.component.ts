@@ -11,9 +11,11 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
   styleUrl: './number-card-chart.component.css'
 })
 export class NumberCardChartComponent {
+  @Input() public title: string = "Title";
   @Input() public data: [] = [];
   @Input() public size: [number, number] = [150, 150];
+  @Input() public cardColor: string = "#0f2052";
   @Input() public colorScheme: any = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#5AA454', '#A10A28', '#892cc7', '#c97834']
   };
 }

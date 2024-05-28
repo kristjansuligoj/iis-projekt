@@ -2,7 +2,7 @@
   padding: 30px;
 }
 
-.tracks-container {
+.page-content {
   display: flex;
   flex-wrap: wrap;
 }

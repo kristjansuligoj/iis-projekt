@@ -2,9 +2,19 @@
   <div class="header">
     <h2>Admin panel</h2>
     <hr/>
+
+    <div class="page-description">
+      <i>
+        The admin panel provides a comprehensive view of today's evaluated metrics, including accuracy, precision, recall, and F1 score, displayed in detailed charts. Additionally, it offers a historical overview of all models previously in production, allowing for performance comparison and trend analysis.
+      </i>
+
+      <hr>
+    </div>
   </div>
 
-  <app-production-metrics/>
+  <div class="page-content">
+    <app-metrics-of-today/>
 
-  <app-metrics-of-today/>
+    <app-production-metrics/>
+  </div>
 </div>

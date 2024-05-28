@@ -1,12 +1,25 @@
 <div class="production-metrics">
-  <p class="title">Metrics of Today</p>
+  <div class="header">
+    <h2>Metrics of today</h2>
+  </div>
 
   <ng-container *ngIf="generateGraph; else noData">
-    <div class="chart-container">
-      <app-number-card-chart class="chart" [data]="predictionsGraphData" [size]="[300, 300]"></app-number-card-chart>
-    </div>
-    <div class="chart-container">
-      <app-number-card-chart class="chart" [data]="metricsGraphData" [size]="[400, 400]"></app-number-card-chart>
+    <div class="charts">
+      <div class="chart-container">
+
+        <app-number-card-chart
+          [title]="'Predictions'"
+          [data]="predictionsGraphData"
+          [size]="[450, 130]"
+        ></app-number-card-chart>
+
+        <app-number-card-chart
+          [title]="'Metrics'"
+          [data]="metricsGraphData"
+          [size]="[850, 130]"
+        ></app-number-card-chart>
+
+      </div>
     </div>
   </ng-container>
 

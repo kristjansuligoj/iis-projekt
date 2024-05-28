@@ -2,9 +2,17 @@
   <div class="header">
     <h2>Library</h2>
     <hr/>
+
+    <div class="page-description">
+      <i>
+        Access your collection of generated tracks and explore new tracks tailored to your preferences.
+      </i>
+
+      <hr>
+    </div>
   </div>
 
-  <div class="tracks-container">
+  <div class="page-content">
     <div *ngFor="let track of tracks" class="track">
       <div class="track-info">
         <p class="generated-at">Generated at: {{ track.title | unixTimestampToDatetime }}</p>

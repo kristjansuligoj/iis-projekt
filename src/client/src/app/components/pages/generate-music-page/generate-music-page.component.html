@@ -1,19 +1,28 @@
 <div class="page">
   <div class="header">
-    <h2>Generate Your Personalized Music</h2>
+    <h2>Generate your personalized music</h2>
     <hr/>
-  </div>
 
-  <ul>
-    <li><strong>Default Mode:</strong> In this mode, you can quickly generate music tracks based on standard settings. Simply choose the basic options and let our algorithms handle the rest.</li>
-    <li><strong>Advanced Mode:</strong> For users who want more control over their music generation experience, the advanced mode offers additional customization options.</li>
-  </ul>
+    <div class="page-description">
+      <i>
+        Generate your personal music, based on the current weather and your past music taste.
+      </i>
+
+      <ul>
+        <li><strong>Default mode:</strong> In this mode, you can quickly generate music tracks based on standard settings. Simply choose the basic options and let our algorithms handle the rest.</li>
+        <li><strong>Advanced mode:</strong> For users who want more control over their music generation experience, the advanced mode offers additional customization options.</li>
+      </ul>
+
+      <hr>
+    </div>
+  </div>
 
   <div class="buttons">
     <button (click)="setMode('default')" class='button' [ngClass]="mode == 'default' ? 'active' : ''">Default</button>
     <button (click)="setMode('advanced')" class='button' [ngClass]="mode == 'advanced' ? 'active' : ''">Advanced</button>
   </div>
 
+  <div class="page-content">
+    <app-generate-music-form [mode]="mode"/>
+  </div>
 </div>
-
-<app-generate-music-form [mode]="mode"/>
