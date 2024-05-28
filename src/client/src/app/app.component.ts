@@ -25,8 +25,5 @@ import {NgxAudioPlayerModule} from "ngx-audio-player";
 export class AppComponent {
   title = 'client';
 
-  constructor(
-    private socketService: SocketService,
-    private notificationService: NotificationService,
-  ) {}
+  constructor() {}
 }
