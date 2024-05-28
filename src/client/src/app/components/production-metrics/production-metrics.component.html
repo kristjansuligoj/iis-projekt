@@ -1,0 +1,26 @@
+<div class="production-metrics">
+  <p class="title">Production Metrics</p>
+
+  <ng-container *ngIf="generateGraph; else noData">
+    <div class="chart">
+      <app-line-chart
+        class="chart"
+        [data]="graphData"
+        [size]="[1500, 350]"
+        [showLegend]="true"
+        [timeline]="true"
+        [showGrid]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [xAxisLabel]="'Date'"
+        [yAxisLabel]="'Accuracy'"
+      ></app-line-chart>
+    </div>
+  </ng-container>
+
+  <ng-template #noData>
+    <div class="no-data">
+      <h3 class="message">Not enough data available for this graph.</h3>
+    </div>
+  </ng-template>
+</div>

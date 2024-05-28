@@ -1,0 +1,30 @@
+.production-metrics {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.chart {
+  margin-bottom: 20px;
+}
+
+.no-data {
+  text-align: center;
+}
+
+.message {
+  color: #666;
+}
+
+.chart {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding-top: 60px;
+  -webkit-box-shadow: 2px 3px 12px -1px rgba(0,0,0,0.67);
+  -moz-box-shadow: 2px 3px 12px -1px rgba(0,0,0,0.67);
+  box-shadow: 2px 3px 12px -1px rgba(0,0,0,0.67);
+}
