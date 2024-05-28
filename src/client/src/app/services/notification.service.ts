@@ -1,6 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
 import {SocketService} from "./socket.service";
-import {TrackService} from "./track.service";
 import {ToastrService} from "ngx-toastr";
 
 @Injectable({
@@ -10,7 +9,6 @@ export class NotificationService {
 
   public constructor(
     public socketService: SocketService,
-    public trackService: TrackService,
     public toastrService: ToastrService,
   ) {
     this.trackGenerated();
