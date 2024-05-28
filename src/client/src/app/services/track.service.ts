@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrackService {
-  private apiUrl: string = 'http://0.0.0.0:8080/api/track';
+  private apiUrl: string = `${environment.apiUrl}/track`;
 
   constructor(
     private http: HttpClient
