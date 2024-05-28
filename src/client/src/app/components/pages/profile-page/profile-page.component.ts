@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
-import {SpotifyService} from "../../../services/spotify.service";
 import {DateFormatPipe} from "../../../pipes/date-format.pipe";
+import {TrackService} from "../../../services/track.service";
 
 @Component({
   selector: 'app-profile-page',
@@ -23,14 +23,14 @@ export class ProfilePageComponent implements OnInit {
 
   public constructor(
     public authService: AuthService,
-    public spotifyService: SpotifyService,
+    public trackService: TrackService,
     public router: Router,
   ) {}
 
   public ngOnInit() {
     this.isAuthorized = this.authService.authorized;
 
-    this.spotifyService.getRecentlyPlayedTracks().subscribe({
+    this.trackService.getRecentlyPlayedTracks().subscribe({
       next: (response: any) => {
         console.log(response);
         this.tracks = response.items;

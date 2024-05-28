@@ -3,8 +3,8 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {NgxSliderModule, Options} from '@angular-slider/ngx-slider';
 import {SliderInputComponent} from "../shared/slider-input/slider-input.component";
 import {NgIf} from "@angular/common";
-import {ApiService} from "../../services/api.service";
 import {ToastrService} from "ngx-toastr";
+import {TrackService} from "../../services/track.service";
 
 @Component({
   selector: 'app-generate-music-form',
@@ -27,7 +27,7 @@ export class GenerateMusicFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService,
+    private trackService: TrackService,
     private toastrService: ToastrService,
   ) {}
 
@@ -67,7 +67,7 @@ export class GenerateMusicFormComponent implements OnInit {
     if (this.mode == "advanced" && this.advancedForm.valid) {
       const trackData = this.advancedForm.value;
 
-      this.apiService.generateTrack(trackData).subscribe({
+      this.trackService.generateTrack(trackData).subscribe({
         next: (response: any) => {
           this.toastrService.info("Note that this might take a while.", "Track is being generated.")
         },
@@ -80,7 +80,7 @@ export class GenerateMusicFormComponent implements OnInit {
     if (this.mode == "default" && this.form.valid) {
       const trackData = this.form.value;
 
-      this.apiService.generateTrack(trackData).subscribe({
+      this.trackService.generateTrack(trackData).subscribe({
         next: (response: any) => {
           this.toastrService.info("Note that this might take a while.", "Track is being generated.")
         },
