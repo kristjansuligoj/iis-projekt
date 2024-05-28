@@ -129,3 +129,27 @@ class MlflowPlatform:
         except IndexError:
             print(f"There was an error replacing production model {model_name}")
             return None
+
+    def get_last_run_from_experiment(self, experiment_name):
+        experiment = mlflow.get_experiment_by_name(experiment_name)
+
+        if experiment:
+            # Get the latest run from the experiment
+            latest_run = mlflow.search_runs(
+                experiment_ids=[experiment.experiment_id],
+                order_by=["start_time DESC"],
+                max_results=1
+            ).iloc[0]
+
+            # Access the run ID
+            latest_run_id = latest_run.run_id
+
+            # Fetch data from the latest run
+            latest_run_data = self.client.get_run(latest_run_id).data
+
+            # Access different attributes of the latest run
+            return latest_run_data.metrics
+
+        else:
+            print(f"Experiment '{experiment_name}' not found.")
+

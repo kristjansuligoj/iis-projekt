@@ -71,6 +71,11 @@ def main():
     # Get predictions from today
     df_predictions = get_predictions_from_today()
 
+    if df_predictions is None:
+        mlflow.log_metric("total_predictions", 0)
+        mlflow.end_run()
+        return
+
     # Get actual values
     df_true_path = os.path.join(PROCESSED_DATA_DIR, "processed_data.csv")
     df_true = pd.read_csv(df_true_path)
@@ -91,11 +96,17 @@ def main():
     recall = recall_score(y_true, y_pred, average='weighted')
     f1 = f1_score(y_true, y_pred, average='weighted')
 
+    # Calculate the count of predictions and false predictions
+    total_predictions = len(df_predictions)
+    false_predictions = sum(1 for true, pred in zip(y_true, y_pred) if true != pred)
+
     # Log the metrics to Mlflow
     mlflow.log_metric("accuracy", accuracy)
     mlflow.log_metric("precision", precision)
     mlflow.log_metric("recall", recall)
     mlflow.log_metric("f1", f1)
+    mlflow.log_metric("total_predictions", total_predictions)
+    mlflow.log_metric("false_predictions", false_predictions)
 
     mlflow.end_run()
 

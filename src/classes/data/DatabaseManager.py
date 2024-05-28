@@ -89,7 +89,10 @@ class DatabaseManager:
             print(f"An error occurred while fetching tokens: {e}")
             return None, None
 
-    def fetch_data(self, collection_name, query, projection=None):
+    def fetch_data(self, collection_name, query=None, projection=None, sort_field=None, sort_order=1):
+        if query is None:
+            query = {}
+
         try:
             if self.client:
                 db = self.client.get_database('iis')
@@ -100,8 +103,15 @@ class DatabaseManager:
                 else:
                     documents = collection.find(query)
 
-                result = [doc for doc in documents]
-                print("Data fetched successfully!")
+                if sort_field:
+                    documents = documents.sort(sort_field, sort_order)
+
+                # Convert ObjectId to string for JSON serialization
+                result = []
+                for doc in documents:
+                    doc['_id'] = str(doc['_id'])
+                    result.append(doc)
+
                 return result
         except PyMongoError as e:
             print(f"An error occurred while fetching data: {e}")

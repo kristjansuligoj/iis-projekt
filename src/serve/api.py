@@ -2,6 +2,7 @@ from src.classes.spotify.spotify_token_manager import SpotifyTokenManager
 from flask import Flask, jsonify, request, make_response, send_file
 from src.classes.data.DatabaseManager import DatabaseManager
 from src.classes.spotify.spotify_client import SpotifyClient
+from src.classes.mlflow.mlflow_platform import MlflowPlatform
 from geventwebsocket.handler import WebSocketHandler
 from flask_socketio import SocketIO
 from definitions import ROOT_DIR
@@ -21,6 +22,7 @@ spotify_api_token_url = os.getenv("SPOTIFY_API_TOKEN_URL")
 spotify_token_manager = SpotifyTokenManager()
 spotify_client = SpotifyClient()
 database_manager = DatabaseManager()
+ml_flow_platform = MlflowPlatform()
 
 
 def api():
@@ -55,6 +57,11 @@ def api():
 
         return send_file(track_path, as_attachment=True)
 
+    @app.route('/api/track/recently_played', methods=['GET'])
+    def get_recently_played_tracks():
+        tracks = spotify_client.get_recently_played_tracks()
+        return make_response(jsonify(tracks), 200)
+
     @app.route('/api/track/list', methods=['GET'])
     def list_tracks():
         # Directory where your tracks are stored
@@ -67,6 +74,30 @@ def api():
         track_filenames = [filename for filename in track_files if os.path.isfile(os.path.join(tracks_dir, filename))]
 
         return jsonify(track_filenames, 200)
+
+    @app.route('/api/track/generate-track', methods=['POST'])
+    def generate_music():
+        print("Predicting genre . . .")
+
+        track_data = request.get_json()
+
+        # Check if data is received
+        if not track_data:
+            return jsonify({"error": "No data provided"}), 400
+
+        # Create model input
+        X_predict, df_input = api_helpers.create_model_input(classification_pipeline, track_data)
+
+        # Predict the genre
+        genre = api_helpers.predict_genre(classification_model, X_predict)
+
+        # Insert prediction to database
+        api_helpers.add_prediction_to_database(df_input, genre)
+
+        # Start creating a track on a separate track
+        threading.Thread(target=generate_track_async, args=(df_input, genre)).start()
+
+        return jsonify('Your track is being generated. This could take some time.', 200)
 
     @app.route('/api/authorize', methods=['GET'])
     def save_access_token():
@@ -90,34 +121,15 @@ def api():
 
         return make_response(jsonify("You are authorized."), 200)
 
-    @app.route('/api/spotify/recently_played_tracks', methods=['GET'])
-    def get_recently_played_tracks():
-        tracks = spotify_client.get_recently_played_tracks()
-        return make_response(jsonify(tracks), 200)
+    @app.route('/api/metrics/production_accuracy', methods=['GET'])
+    def get_production_metrics():
+        production_metrics = database_manager.fetch_data('production_accuracy', sort_field='datetime')
+        return make_response(jsonify(production_metrics), 200)
 
-    @app.route('/api/generate-track', methods=['POST'])
-    def generate_music():
-        print("Predicting genre . . .")
-
-        track_data = request.get_json()
-
-        # Check if data is received
-        if not track_data:
-            return jsonify({"error": "No data provided"}), 400
-
-        # Create model input
-        X_predict, df_input = api_helpers.create_model_input(classification_pipeline, track_data)
-
-        # Predict the genre
-        genre = api_helpers.predict_genre(classification_model, X_predict)
-
-        # Insert prediction to database
-        api_helpers.add_prediction_to_database(df_input, genre)
-
-        # Start creating a track on a separate track
-        threading.Thread(target=generate_track_async, args=(df_input, genre)).start()
-
-        return jsonify('Your track is being generated. This could take some time.', 200)
+    @app.route('/api/metrics/metrics_of_today', methods=['GET'])
+    def get_metrics_of_today():
+        metrics_of_today = ml_flow_platform.get_last_run_from_experiment('Past predictions')
+        return make_response(jsonify(metrics_of_today), 200)
 
     @socketio.on('connect')
     def test_connect():
