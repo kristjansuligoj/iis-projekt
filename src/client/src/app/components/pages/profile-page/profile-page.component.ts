@@ -46,7 +46,7 @@ export class ProfilePageComponent implements OnInit {
       `https://accounts.spotify.com/authorize?` +
       `response_type=code&` +
       `client_id=2b71db2edbd7471cbaf3501242ddd3c7&` +
-      `redirect_uri=http://localhost:4200/authorization/callback&` +
+      `redirect_uri=http://localhost/authorization/callback&` +
       `scope=user-read-recently-played`;
   }
 
