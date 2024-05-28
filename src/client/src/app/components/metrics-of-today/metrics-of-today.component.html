@@ -1,0 +1,18 @@
+<div class="production-metrics">
+  <p class="title">Metrics of Today</p>
+
+  <ng-container *ngIf="generateGraph; else noData">
+    <div class="chart-container">
+      <app-number-card-chart class="chart" [data]="predictionsGraphData" [size]="[300, 300]"></app-number-card-chart>
+    </div>
+    <div class="chart-container">
+      <app-number-card-chart class="chart" [data]="metricsGraphData" [size]="[400, 400]"></app-number-card-chart>
+    </div>
+  </ng-container>
+
+  <ng-template #noData>
+    <div class="no-data">
+      <h3 class="message">No predictions were made today.</h3>
+    </div>
+  </ng-template>
+</div>
