@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
 
-  baseUrl: 'http://164.8.204.178:8080',
-  apiUrl: 'http://164.8.204.178:8080/api',
+  baseUrl: 'https://p01--iis-api--462724rjs8tc.code.run',
+  apiUrl: 'https://p01--iis-api--462724rjs8tc.code.run/api',
 };
