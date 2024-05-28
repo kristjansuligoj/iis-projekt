@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TrackService} from "../../../services/track.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {NgxAudioPlayerModule} from "ngx-audio-player";
 import {firstValueFrom, Observable} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 import {UnixTimestampToDatetimePipe} from "../../../pipes/unix-timestamp-to-datetime.pipe";
@@ -12,7 +11,6 @@ import {UnixTimestampToDatetimePipe} from "../../../pipes/unix-timestamp-to-date
   imports: [
     NgForOf,
     NgIf,
-    NgxAudioPlayerModule,
     UnixTimestampToDatetimePipe,
   ],
   templateUrl: './library-page.component.html',

@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgxSliderModule, Options} from '@angular-slider/ngx-slider';
 import {SliderInputComponent} from "../shared/slider-input/slider-input.component";
 import {NgIf} from "@angular/common";
 import {ToastrService} from "ngx-toastr";
@@ -12,7 +11,6 @@ import {TrackService} from "../../services/track.service";
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    NgxSliderModule,
     SliderInputComponent,
     NgIf
   ],
