@@ -43,7 +43,7 @@ def api():
         # Save track to file
         track_file_name = api_helpers.save_track_to_file(track, genre)
 
-    @app.route('/api/track/download-specific', methods=['GET'])
+    @app.route('/api/tracks/download-specific', methods=['GET'])
     def download_track():
         track_file_name = request.args.get('track_file_name')
 
@@ -54,12 +54,12 @@ def api():
 
         return send_file(track_path, as_attachment=True)
 
-    @app.route('/api/track/recently_played', methods=['GET'])
+    @app.route('/api/tracks/recently-played', methods=['GET'])
     def get_recently_played_tracks():
         tracks = spotify_client.get_recently_played_tracks()
         return make_response(jsonify(tracks), 200)
 
-    @app.route('/api/track/list', methods=['GET'])
+    @app.route('/api/tracks/list', methods=['GET'])
     def list_tracks():
         # Directory where your tracks are stored
         tracks_dir = os.path.join(ROOT_DIR, "tracks")
@@ -72,7 +72,7 @@ def api():
 
         return jsonify(track_filenames, 200)
 
-    @app.route('/api/track/generate-track', methods=['POST'])
+    @app.route('/api/tracks/generate', methods=['POST'])
     def generate_music():
         print("Predicting genre . . .")
 
@@ -118,12 +118,12 @@ def api():
 
         return make_response(jsonify("You are authorized."), 200)
 
-    @app.route('/api/metrics/production_accuracy', methods=['GET'])
+    @app.route('/api/metrics/production-accuracy', methods=['GET'])
     def get_production_metrics():
         production_metrics = database_manager.fetch_data('production_accuracy', sort_field='datetime')
         return make_response(jsonify(production_metrics), 200)
 
-    @app.route('/api/metrics/metrics_of_today', methods=['GET'])
+    @app.route('/api/metrics/metrics-of-today', methods=['GET'])
     def get_metrics_of_today():
         metrics_of_today = ml_flow_platform.get_last_run_from_experiment('Past predictions')
         return make_response(jsonify(metrics_of_today), 200)

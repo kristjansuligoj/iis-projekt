@@ -7,22 +7,22 @@ import {environment} from "../../environments/environment";
   providedIn: 'root',
 })
 export class TrackService {
-  private apiUrl: string = `${environment.apiUrl}/track`;
+  private apiUrl: string = `${environment.apiUrl}/tracks`;
 
   constructor(
     private http: HttpClient
   ) {}
 
   public getRecentlyPlayedTracks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/recently_played`);
+    return this.http.get<any[]>(`${this.apiUrl}/recently-played`);
   }
 
   public generateTrack(trackData: any): Observable<any[]> {
-    return this.http.post<any[]>(`${this.apiUrl}/generate-track`, trackData);
+    return this.http.post<any[]>(`${this.apiUrl}/generate`, trackData);
   }
 
   public downloadTrack(track: string): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}/download-specific?track_file_name=${track}`, { responseType: 'blob' });
+    return this.http.get(`${this.apiUrl}/download-specific?track-file-name=${track}`, { responseType: 'blob' });
   }
 
   public getGeneratedTracks(): Observable<any[]> {

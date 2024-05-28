@@ -14,10 +14,10 @@ export class MetricsService {
   ) {}
 
   public getProductionMetrics(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/production_accuracy`);
+    return this.http.get<any[]>(`${this.apiUrl}/production-accuracy`);
   }
 
   public getMetricsOfToday(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/metrics_of_today`);
+    return this.http.get<any[]>(`${this.apiUrl}/metrics-of-today`);
   }
 }
