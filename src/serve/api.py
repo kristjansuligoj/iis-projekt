@@ -28,23 +28,20 @@ ml_flow_platform = MlflowPlatform()
 def api():
     app = Flask(__name__)
     CORS(app)
-    socketio = SocketIO(app, cors_allowed_origins='*')
 
     classification_model, classification_pipeline = api_helpers.get_model_and_pipeline_from_stage("production")
-    musicgen_model = api_helpers.download_musicgen_model()
+    musicgen_pipeline = ml_flow_platform.get_musicgen_pipeline()
 
     def generate_track_async(df_input, genre):
         print("Track is being generated")
 
         # Generate track
-        track = api_helpers.generate_track(musicgen_model, df_input, genre)
+        track = api_helpers.generate_track(musicgen_pipeline, df_input, genre)
 
         print("Track generated.")
 
         # Save track to file
         track_file_name = api_helpers.save_track_to_file(track, genre)
-
-        socketio.emit('track-generated', track_file_name)
 
     @app.route('/api/track/download-specific', methods=['GET'])
     def download_track():
@@ -131,18 +128,8 @@ def api():
         metrics_of_today = ml_flow_platform.get_last_run_from_experiment('Past predictions')
         return make_response(jsonify(metrics_of_today), 200)
 
-    @socketio.on('connect')
-    def test_connect():
-        print('Client connected')
-
-    @socketio.on('disconnect')
-    def test_disconnect():
-        print('Client disconnected')
-
     print("Starting server. . .")
-    server = pywsgi.WSGIServer(('0.0.0.0', 8080), app, handler_class=WebSocketHandler)
-    server.serve_forever()
-    print("Server started.")
+    app.run(host='0.0.0.0', port=8080)
 
 
 if __name__ == "__main__":

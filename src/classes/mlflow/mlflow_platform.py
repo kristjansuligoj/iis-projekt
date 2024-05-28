@@ -95,6 +95,29 @@ class MlflowPlatform:
             print(f"There was an error downloading {pipeline_name} in {stage}")
             return None
 
+    def get_musicgen_pipeline(self):
+        print(f"\nRetrieving musicgen pipeline.\n")
+
+        # Download model and pipeline for station
+        pipeline = self.download_pipeline(f"pipeline=musicgen_pipeline", "production")
+
+        print(f"\nMusicgen pipeline downloaded.\n")
+
+        # Create model directory if it does not exist
+        base_station_directory = os.path.join(ROOT_DIR, "models", "musicgen")
+        DataManager.make_directory_if_missing(base_station_directory)
+
+        print(f"\nSaving musicgen pipeline.\n")
+
+        # # Save pipeline
+        # pipeline_path = os.path.join(base_station_directory, f"pipeline=musicgen_pipeline.gz")
+        # joblib.dump(pipeline, pipeline_path)
+
+        print(f"\nMusicgen pipeline saved.\n")
+
+        return pipeline
+
+
     def get_latest_model(self, stage, name):
         # Download model and pipeline for station
         model = self.download_onnx_model(name, stage)
