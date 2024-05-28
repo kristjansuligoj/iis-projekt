@@ -1,17 +1,17 @@
 # Use Python 3.9.5
-FROM python:3.9.5
+FROM python:3.9.5-slim
 
 # Set the working directory
 WORKDIR /app
 
 # Install Poetry
-RUN pip install poetry==1.8.2
+RUN pip install --no-cache-dir poetry==1.8.2
 
 # Copy the poetry.lock and pyproject.toml files
 COPY poetry.lock pyproject.toml /app/
 
 # Install dependencies using Poetry
-RUN poetry install --no-interaction --no-root
+RUN poetry install --no-interaction --no-root --no-dev
 
 # Copy the rest of the application code
 COPY . /app
