@@ -12,7 +12,7 @@ env:
    REGISTRY: ghcr.io
    IMAGE_NAME: ${{ github.repository }}
 
-   PROJECT_ID: iis-projekt
+   PROJECT_ID: iis-vaja
    SERVICE_ID: iis-client
    CREDENTIALS_ID: iis-vaja-registry
 
