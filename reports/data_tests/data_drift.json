@@ -1,7 +1,7 @@
 {
-  "id": "0710c4ca-d5c7-4484-88d8-ff60e74b8a86",
+  "id": "87199736-943c-4d98-9815-b39768aa4fb2",
   "name": null,
-  "timestamp": "2024-05-30T04:37:24.116481",
+  "timestamp": "2024-05-30T05:30:42.731810",
   "metadata": {
     "metric_presets": [
       "DataDriftPreset"
@@ -17776,81 +17776,73 @@
     },
     "data_definition": {
       "columns": {
-        "rain": {
-          "column_name": "rain",
-          "column_type": "num"
-        },
-        "speechiness": {
-          "column_name": "speechiness",
-          "column_type": "num"
-        },
-        "apparent_temperature": {
-          "column_name": "apparent_temperature",
-          "column_type": "num"
-        },
-        "temperature": {
-          "column_name": "temperature",
-          "column_type": "num"
-        },
-        "dew_point": {
-          "column_name": "dew_point",
-          "column_type": "num"
-        },
-        "energy": {
-          "column_name": "energy",
-          "column_type": "num"
-        },
-        "instrumentalness": {
-          "column_name": "instrumentalness",
-          "column_type": "num"
-        },
-        "liveness": {
-          "column_name": "liveness",
-          "column_type": "num"
-        },
-        "loudness": {
-          "column_name": "loudness",
+        "acousticness": {
+          "column_name": "acousticness",
           "column_type": "num"
         },
         "precipitation_probability": {
           "column_name": "precipitation_probability",
           "column_type": "num"
         },
-        "acousticness": {
-          "column_name": "acousticness",
-          "column_type": "num"
-        },
-        "relative_humidity": {
-          "column_name": "relative_humidity",
-          "column_type": "num"
-        },
-        "tempo": {
-          "column_name": "tempo",
-          "column_type": "num"
-        },
         "valence": {
           "column_name": "valence",
+          "column_type": "num"
+        },
+        "apparent_temperature": {
+          "column_name": "apparent_temperature",
+          "column_type": "num"
+        },
+        "speechiness": {
+          "column_name": "speechiness",
+          "column_type": "num"
+        },
+        "loudness": {
+          "column_name": "loudness",
           "column_type": "num"
         },
         "danceability": {
           "column_name": "danceability",
           "column_type": "num"
         },
-        "key": {
-          "column_name": "key",
+        "energy": {
+          "column_name": "energy",
+          "column_type": "num"
+        },
+        "tempo": {
+          "column_name": "tempo",
+          "column_type": "num"
+        },
+        "temperature": {
+          "column_name": "temperature",
           "column_type": "num"
         },
         "surface_pressure": {
           "column_name": "surface_pressure",
           "column_type": "num"
         },
-        "mode": {
-          "column_name": "mode",
-          "column_type": "cat"
+        "key": {
+          "column_name": "key",
+          "column_type": "num"
         },
-        "genre": {
-          "column_name": "genre",
-          "column_type": "cat"
+        "rain": {
+          "column_name": "rain",
+          "column_type": "num"
+        },
+        "instrumentalness": {
+          "column_name": "instrumentalness",
+          "column_type": "num"
+        },
+        "relative_humidity": {
+          "column_name": "relative_humidity",
+          "column_type": "num"
+        },
+        "dew_point": {
+          "column_name": "dew_point",
+          "column_type": "num"
+        },
+        "liveness": {
+          "column_name": "liveness",
+          "column_type": "num"
         },
         "explicit": {
           "column_name": "explicit",
@@ -17858,6 +17850,14 @@
         },
         "date": {
           "column_name": "date",
+          "column_type": "cat"
+        },
+        "genre": {
+          "column_name": "genre",
+          "column_type": "cat"
+        },
+        "mode": {
+          "column_name": "mode",
           "column_type": "cat"
         }
       },
